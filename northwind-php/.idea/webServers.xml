@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a2013ac7-1c75-4b12-9f82-f7cecc526c54" name="apache" url="http://localhost/northwind">
+        <fileTransfer mountedRoot="/Library/WebServer/Documents/northwind" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
