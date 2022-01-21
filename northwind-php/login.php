@@ -2,7 +2,7 @@
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["userInfo"] = "Virtual Academy";
-    header("Location: /index.php");
+    header("Location: /northwind-php/index.php");
 
 }
 ?>

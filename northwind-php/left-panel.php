@@ -2,7 +2,7 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/categories/categories.php">
+                        <a class="nav-link active" aria-current="page" href="/northwind-php/categories/categories.php">
                             <span data-feather="home"></span>
                             Categories
                         </a>

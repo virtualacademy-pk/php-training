@@ -1,8 +1,8 @@
 <?php
 
 include_once '../common/connect.php';
-$sortBy =  $_GET['sortby'];
-$sortOrder =  $_GET['sortorder'];
+$sortBy =  $_GET['sortby'] ?? '';
+$sortOrder =  $_GET['sortorder'] ?? '';
 if (empty($sortOrder)) {
     $sortOrder = 'asc';
 }
@@ -15,7 +15,7 @@ $sql = "SELECT CategoryID, CategoryName,Picture From Categories order by Categor
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {?>
     <div class="table-responsive">
-        <?php echo 'sort by ' . $_GET['sortby']; ?>
+        <?php echo 'sort by ' . $sortBy; ?>
         <table class="table table-striped table-sm">
             <thead>
             <tr>

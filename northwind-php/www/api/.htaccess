@@ -1,3 +1,0 @@
-RewriteEngine On # Turn on the rewriting engine
-RewriteRule ^categories/?$ categories.php [NC,L]
-RewriteRule ^categories/([0-9]+)/?$ categories.php?id=$1 [NC,L]

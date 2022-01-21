@@ -5,9 +5,9 @@ function add_categories($data)
     include_once '../common/connect.php';
     $json = json_decode($data, true);
 
-    $categoryId = $json["CategoryId"];
-    $categoryName = $json["CategoryName"];
-    $description = $json["Description"];
+    $categoryId = $json["categoryId"];
+    $categoryName = $json["categoryName"];
+    $description = $json["description"];
     $sql = "INSERT INTO Categories (CategoryID, CategoryName, Description)
     VALUES (" . $categoryId . ", '" . $categoryName . "','" . $description . "')";
     header('Content-Type: application/json');
@@ -29,9 +29,9 @@ function update_category($data)
     include_once '../common/connect.php';
     $json = json_decode($data, true);
 
-    $categoryId = $json["CategoryId"];
-    $categoryName = $json["CategoryName"];
-    $description = $json["Description"];
+    $categoryId = $json["categoryId"];
+    $categoryName = $json["categoryName"];
+    $description = $json["description"];
 
     $sql = "UPDATE Categories set CategoryName =  " . "'" . $categoryName . "',description = '" . $description . "'";
     $sql .= " WHERE categoryId = " . $categoryId;
@@ -50,16 +50,16 @@ function update_category($data)
 
 function get_categories()
 {
-    $sql = "SELECT CategoryID, CategoryName,Picture From Categories order by CategoryID";
+    $sql = "SELECT categoryId, categoryName,picture From Categories order by CategoryID";
     $sortBy = $_GET['sortby'] ?? '';
     $sortOrder = $_GET['sortorder'] ?? '';
     if (empty($sortOrder)) {
         $sortOrder = 'asc';
     }
     if (empty($sortBy)) {
-        $sql = "SELECT CategoryID, CategoryName,Picture From Categories order by CategoryID";
+        $sql = "SELECT categoryId, categoryName,description,Picture From Categories order by CategoryId";
     } else {
-        $sql = "SELECT CategoryID, CategoryName,Picture From Categories order by " . $sortBy . ' ' . $sortOrder;
+        $sql = "SELECT categoryId, categoryName,description,Picture From Categories order by " . $sortBy . ' ' . $sortOrder;
 
     }
     include_once '../common/connect.php';
@@ -69,8 +69,9 @@ function get_categories()
     header('Content-Type: application/json');
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $data['CategoryID'] = $row['CategoryID'];
-            $data['CategoryName'] = $row['CategoryName'];
+            $data['categoryId'] = $row['categoryId'];
+            $data['categoryName'] = $row['categoryName'];
+            $data['description'] = $row['description'];
             $response[] = $data;
 
         }
@@ -86,18 +87,19 @@ function get_categories()
 function get_category($id)
 {
 
-    $sql = "SELECT CategoryID, CategoryName,Picture From Categories where CategoryId = " . $id;
+    $sql = "SELECT categoryId, categoryName,picture ,description From categories where CategoryId = " . $id;
 
     include_once '../common/connect.php';
-    $response = array();
+    $response ;
 
     $result = $conn->query($sql);
     header('Content-Type: application/json');
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $data['CategoryID'] = $row['CategoryID'];
-            $data['CategoryName'] = $row['CategoryName'];
-            $response[] = $data;
+            $data['categoryId'] = $row['categoryId'];
+            $data['categoryName'] = $row['categoryName'];
+            $data['description'] = $row['description'];
+            $response = $data;
 
         }
         $conn->close();
@@ -105,7 +107,7 @@ function get_category($id)
         echo json_encode($response);
     } else {
         $conn->close();
-        echo "[]";
+        echo "{}";
     }
 }
 
@@ -121,8 +123,8 @@ function filter_category($name)
     header('Content-Type: application/json');
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $data['CategoryID'] = $row['CategoryID'];
-            $data['CategoryName'] = $row['CategoryName'];
+            $data['categoryId'] = $row['CategoryID'];
+            $data['categoryName'] = $row['CategoryName'];
             $response[] = $data;
 
         }
@@ -154,7 +156,7 @@ function delete_category($id)
         header('HTTP/1.1 500 Internal Server Error');
 
         echo json_encode(
-            array("message" => $conn->error)
+            array("message" => "Can not delete category, its in use.")
         );
     }
 
