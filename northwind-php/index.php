@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once 'header.php';
+
 ?>
 <html>
 <head>
@@ -10,8 +11,21 @@ session_start();
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 
     <a class="navbar-brand col-md-3 col-lg-3 me-0 px-3" href="#">Company name</a>
-    <ul class="nav col-md-9 col-md-auto mb-2 justify-content-start mb-md-0">
-
+    <ul class="nav col-md-3 mb-2 justify-content-start mb-md-0">
+        <?php
+        if (isset($_SESSION["userInfo"])) {
+        ?>
+        <li><a  class="nav-link px-2 link-secondary"  >
+                Welcome, <?php echo $_SESSION["userInfo"] ?? ''; ?>
+            </a>
+        </li>
+        <li><a  class="nav-link px-2 link-secondary" href="/northwind-php/logout.php" >
+                Logout
+            </a>
+        </li>
+            <?php
+        }
+            ?>
     </ul>
 
 

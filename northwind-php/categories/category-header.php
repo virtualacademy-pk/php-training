@@ -10,14 +10,22 @@
 
     </ul>
     <ul class="nav col-md-3 mb-2 justify-content-start mb-md-0">
+        <?php
+        if (isset($_SESSION['userInfo'])) {
+        ?>
         <li><a  class="nav-link px-2 link-secondary"  >
                 Welcome, <?php echo $_SESSION["userInfo"] ?? ''; ?>
             </a>
         </li>
-        <li><a  class="nav-link px-2 link-secondary" href="/logout.php" >
+        <li><a  class="nav-link px-2 link-secondary" href="/northwind-php/logout.php" >
                Logout
             </a>
         </li>
+        <?php
+        } else {
+            header("Location: /northwind-php/login.php");
+        }
+        ?>
 
     </ul>
 </header>
