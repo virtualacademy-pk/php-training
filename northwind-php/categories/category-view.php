@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $categoryName = $_POST["categoryName"];
     $description = $_POST["description"];
     if (isset($action)) {
-        $action = "/categories/category.php?action=add";
+        $action = "/categories/categories.php?action=add";
     }
     echo $action;
     require_once '../common/connect.php';

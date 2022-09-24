@@ -155,7 +155,7 @@ function filter_product($name)
 function delete_product($id)
 {
     include_once '../common/connect.php';
-    $sql = "DELETE FROM  products where  product = " . $id;
+    $sql = "DELETE FROM  products where  productId = " . $id;
 
     if ($conn->query($sql) === TRUE) {
         $conn->close();

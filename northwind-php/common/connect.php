@@ -1,7 +1,7 @@
 <?php
 
     $conn = new mysqli(
-        '192.168.120.100',
+        'localhost',
         'root',
         'pakistan',
         'northwind',

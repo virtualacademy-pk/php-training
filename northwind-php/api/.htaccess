@@ -6,7 +6,21 @@
     Require all denied
 </LimitExcept>
 RewriteEngine On # Turn on the rewriting engine
-RewriteRule ^categories/?$ categories.php [NC,L]
-RewriteRule ^categories/([0-9]+)/?$ categories.php?id=$1 [NC,L]
+RewriteRule ^categories/?$ categories-api.php [NC,L]
+RewriteRule ^categories/([0-9]+)/?$ categories-api.php?id=$1 [NC,L]
 RewriteRule ^products/?$ product-api.php [NC,L]
 RewriteRule ^products/([0-9]+)/?$ product-api.php?id=$1 [NC,L]
+RewriteRule ^employees/?$ employee-api.php [NC,L]
+RewriteRule ^employees/([0-9]+)/?$ employee-api.php?id=$1 [NC,L]
+RewriteRule ^customers/?$ customers-api.php [NC,L]
+RewriteRule ^customers/([0-9]+)/?$ customers-api.php?id=$1 [NC,L]
+RewriteRule ^suppliers/?$ suppliers-api.php [NC,L]
+RewriteRule ^suppliers/([0-9]+)/?$ suppliers-api.php?id=$1 [NC,L]
+RewriteRule ^shippers/?$ shippers-api.php [NC,L]
+RewriteRule ^shippers/([0-9]+)/?$ shippers-api.php?id=$1 [NC,L]
+RewriteRule ^regions/?$ regions-api.php [NC,L]
+RewriteRule ^regions/([0-9]+)/?$ regions-api.php?id=$1 [NC,L]
+RewriteRule ^territories/?$ territories-api.php [NC,L]
+RewriteRule ^territories/([0-9]+)/?$ territories-api.php?id=$1 [NC,L]
+RewriteRule ^orders/?$ orders-api.php [NC,L]
+RewriteRule ^orders/([0-9]+)/?$ orders-api.php?id=$1 [NC,L]

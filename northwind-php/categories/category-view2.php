@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
 
     if (empty($action)) {
-        $action =   "/categories/category.php?action=add";
+        $action =   "/categories/categories.php?action=add";
     }
     require_once '../common/connect.php';
 
@@ -45,10 +45,10 @@ VALUES (" . $categoryId . ", '" . $categoryName . "','" . $description . "')";
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     require_once '../common/connect.php';
     $id =  $_GET["id"];
-    $action =   "/categories/category.php?action=add";
+    $action =   "/categories/categories.php?action=add";
 
     if ($id > 0 ) {
-        $action =   "/categories/category.php?action=edit";
+        $action =   "/categories/categories.php?action=edit";
         $sql = "SELECT CategoryID, CategoryName, Description FROM Categories  where CategoryID = " . $id;
 
         $result = $conn->query($sql);
