@@ -14,9 +14,11 @@ include_once 'header.php';
     <ul class="nav col-md-3 mb-2 justify-content-start mb-md-0">
         <?php
         if (isset($_SESSION["userInfo"])) {
+            $userName = $_SESSION["userInfo"]["userName"];
+            $employeeName = $_SESSION["userInfo"]["employeeName"];
         ?>
         <li><a  class="nav-link px-2 link-secondary"  >
-                Welcome, <?php echo $_SESSION["userInfo"] ?? ''; ?>
+                 <?php echo $employeeName . " (" . $userName . ")" ?>
             </a>
         </li>
         <li><a  class="nav-link px-2 link-secondary" href="/northwind-php/logout.php" >
