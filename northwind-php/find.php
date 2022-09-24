@@ -3,7 +3,7 @@
 $id = $_GET['id'];
 if (isset($id)) {
     require_once '../common/connect.php';
-
+    $conn = get_connection();
     $sql = "select CategoryID, CategoryName, Description from Categories  where CategoryID = " . $id;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {?>

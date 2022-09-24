@@ -1,6 +1,7 @@
 <?php
 
 include_once '../common/connect.php';
+$conn = get_connection();
 $sortBy =  $_GET['sortby'] ?? '';
 $sortOrder =  $_GET['sortorder'] ?? '';
 if (empty($sortOrder)) {

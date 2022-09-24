@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     echo $action;
     require_once '../common/connect.php';
+    $conn = get_connection();
     if ($action == "add") {
         $sql = "INSERT INTO Categories (CategoryID, CategoryName, Description)
         VALUES (" . $categoryId . ", '" . $categoryName . "','" . $description . "')";

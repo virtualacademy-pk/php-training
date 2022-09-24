@@ -1,10 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_contact($contact_type, $data)
 {
-
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
-
     $contactId = $json['contactId'];
     $companyName = $json['companyName'];
     $contactName = $json['contactName'];
@@ -12,7 +12,6 @@ function add_contact($contact_type, $data)
     $address = $json['address'];
     $city = $json['city'];
     $regionId = $json['regionId'];
-    $regionName = $json['regionName'];
     $postalCode = $json['postalCode'];
     $country = $json['country'];
     $phone = $json['phone'];
@@ -37,7 +36,7 @@ VALUES ($contactId, '$companyName', '$contactName', '$contactTitle', '$address',
 
 function update_contact($contact_type, $data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $contactId = $json['contactId'];
@@ -97,7 +96,7 @@ left join region on region.RegionID = contacts.Regionid
   where contacts.contact_type_id = $contact_type order by e." . $sortBy . ' ' . $sortOrder;
 
     }
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -143,7 +142,7 @@ FROM contacts
  left join region on region.RegionID = contacts.Regionid
     where contacts.contact_type_id = $contact_type and  contactId=  $id ";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = '' ;
 
     $result = $conn->query($sql);
@@ -186,7 +185,7 @@ FROM contacts
  left join region on region.RegionID = contacts.Regionid
 where contacts.contact_type_id = $contact_type ";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -222,7 +221,7 @@ where contacts.contact_type_id = $contact_type ";
 
 function delete_contact($contact_type, $id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  contacts where contact_tpe_id = $contact_type and  contactId = " . $id;
     $response = "";
     if ($conn->query($sql) === TRUE) {

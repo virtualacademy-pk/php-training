@@ -1,8 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_product($data)
 {
 
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $productId = $json["productId"];
@@ -28,7 +30,7 @@ function add_product($data)
 
 function update_product($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $productId = $json["productId"];
@@ -66,7 +68,7 @@ function get_products()
         $sql = "select productId, productName, products.categoryId,  categoryName, unitPrice from products inner join categories on products.categoryId = categories.categoryId  order by " . $sortBy . ' ' . $sortOrder;
 
     }
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -98,7 +100,7 @@ function get_product($id)
 
     $sql = "select productId, productName, products.categoryId,  categoryName, unitPrice from products inner join categories on products.categoryId = categories.categoryId where productId = " . $id;
 
-    include_once '../common/connect.php';
+    global $conn;
     $response ;
 
     $result = $conn->query($sql);
@@ -127,7 +129,7 @@ function filter_product($name)
 
     $sql = "select productId, productName, categoryId,  unitPrice from products where productName like  '%" . $name . "%'";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -154,7 +156,7 @@ function filter_product($name)
 
 function delete_product($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  products where  productId = " . $id;
 
     if ($conn->query($sql) === TRUE) {

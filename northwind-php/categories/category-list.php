@@ -1,6 +1,7 @@
 <?php
 
 include_once '../common/connect.php';
+$conn = get_connection();
 $sql = "SELECT CategoryID, CategoryName,Picture From Categories order by CategoryID";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {?>

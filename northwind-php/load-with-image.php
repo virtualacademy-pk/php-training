@@ -5,6 +5,7 @@
 <body>
 <?php
 require_once '../common/connect.php';
+$conn = get_connection();
 $sql = "SELECT CategoryID, CategoryName, Picture FROM Categories";
 $result = $conn->query($sql);
 

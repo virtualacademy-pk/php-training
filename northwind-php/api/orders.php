@@ -1,8 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_order($data)
 {
 
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $orderId = $json['orderId'];
@@ -44,7 +46,7 @@ function add_order($data)
 
 function update_order($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $orderId = $json['orderId'];
@@ -92,7 +94,7 @@ left join employees e on o.EmployeeID = e.EmployeeID
 left join contacts sh on o.ShipVia = sh.contactID
 left join region r on o.ShipRegion = r.regionId";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -142,7 +144,7 @@ left join employees e on o.EmployeeID = e.EmployeeID
 left join contacts sh on o.ShipVia = sh.contactID
 left join region r on o.ShipRegion = r.regionId where o.orderId = $id";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response ;
 
     $result = $conn->query($sql);
@@ -183,7 +185,7 @@ left join region r on o.ShipRegion = r.regionId where o.orderId = $id";
 
 function delete_order($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  orderdetails where  orderId = " . $id;
 
     if ($conn->query($sql) === TRUE) {

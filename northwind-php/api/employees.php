@@ -1,8 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_employee($data)
 {
 
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $employeeId = $json['employeeId'];
@@ -41,7 +43,7 @@ function add_employee($data)
 
 function update_employee($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $employeeId = $json['employeeId'];
@@ -99,7 +101,7 @@ from employees e LEFT JOIN employees r on e.ReportsTo = r.EmployeeID order by e.
 from employees e LEFT JOIN employees r on e.ReportsTo = r.EmployeeID  order by e." . $sortBy . ' ' . $sortOrder;
 
     }
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -148,7 +150,7 @@ function get_employee($id)
        e.Photo, e.Notes, e.ReportsTo, concat(r.FirstName, ' ', r.LastName) ReportsToName ,e.PhotoPath, e.Salary
 from employees e LEFT JOIN employees r on e.ReportsTo = r.EmployeeID where e.employeeID = $id ";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response ;
 
     $result = $conn->query($sql);
@@ -194,7 +196,7 @@ function filter_employee($name)
        e.Photo, e.Notes, e.ReportsTo, concat(r.FirstName, ' ', r.LastName) ReportsToName ,e.PhotoPath, e.Salary
 from employees e LEFT JOIN employees r on e.ReportsTo = r.EmployeeID  ";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -235,7 +237,7 @@ from employees e LEFT JOIN employees r on e.ReportsTo = r.EmployeeID  ";
 
 function delete_employee($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  employees where  employeeId = " . $id;
 
     if ($conn->query($sql) === TRUE) {

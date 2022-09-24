@@ -40,7 +40,7 @@ include 'category-header.php';
                 $categoryName = $_POST["categoryName"];
                 $description = $_POST["description"];
                 require_once '../common/connect.php';
-
+                $conn = get_connection();
                 $sql = "UPDATE Categories set CategoryName =  "."'" . $categoryName . "',description = '" . $description ."'";
                 if (isset($picture)) {
                     $sql .= ", Picture = '$picture' ";
@@ -59,6 +59,7 @@ include 'category-header.php';
                 $conn->close();
             } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 require_once '../common/connect.php';
+                $conn = get_connection();
                 $id =  $_GET["id"];
                 if ($id > 0 ) {
 

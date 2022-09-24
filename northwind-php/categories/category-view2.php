@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action =   "/categories/categories.php?action=add";
     }
     require_once '../common/connect.php';
+    $conn = get_connection();
 
     if ($action == "add") {
         $sql = "INSERT INTO Categories (CategoryID, CategoryName, Description)

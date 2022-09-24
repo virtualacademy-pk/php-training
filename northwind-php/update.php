@@ -1,5 +1,6 @@
 <?php
 require_once '../common/connect.php';
+$conn = get_connection();
 $sql = "UPDATE Categories set CategoryName = 'Category Na 10', Description = 'Cat 10 Des ' where  CategoryID = 10";
 
 if ($conn->query($sql) === TRUE) {

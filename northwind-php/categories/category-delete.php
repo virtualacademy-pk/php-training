@@ -30,6 +30,7 @@ if (empty($page)) {
             error_reporting(0);
             if ( $categoryId > 0) {
                 require_once '../common/connect.php';
+                $conn = get_connection();
                 $sql = "DELETE FROM  Categories where  CategoryID = " . $categoryId;
 
                 if ($conn->query($sql) === TRUE) {?>

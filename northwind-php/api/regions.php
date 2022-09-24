@@ -1,8 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_region($data)
 {
 
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $regionId = $json["regionId"];
@@ -26,7 +28,7 @@ function add_region($data)
 
 function update_region($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $regionId = $json["regionId"];
@@ -52,7 +54,7 @@ function get_regions()
 {
     $sql = "SELECT regionId, regionDescription From region order by regionId";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -78,7 +80,7 @@ function get_region($id)
 
     $sql = "SELECT regionId, regionDescription From region where regionId = $id";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response ;
 
     $result = $conn->query($sql);
@@ -102,7 +104,7 @@ function get_region($id)
 
 function delete_region($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  region where  regionId = " . $id;
 
     if ($conn->query($sql) === TRUE) {

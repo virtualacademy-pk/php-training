@@ -29,6 +29,7 @@ include 'category-header.php';
                 $description = $_POST["description"];
                 $picture = addslashes(file_get_contents($_FILES['picture']['tmp_name']));
                 require_once '../common/connect.php';
+             $conn = get_connection();
 
                 $sql = "INSERT INTO Categories (CategoryID, CategoryName, Description, Picture)
         VALUES (" . $categoryId . ", '" . $categoryName . "','" . $description . "', '{$picture}')";

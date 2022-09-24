@@ -1,10 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_categories($data)
 {
-
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
-
     $categoryId = $json["categoryId"];
     $categoryName = $json["categoryName"];
     $description = $json["description"];
@@ -26,13 +26,11 @@ function add_categories($data)
 
 function update_category($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
-
     $categoryId = $json["categoryId"];
     $categoryName = $json["categoryName"];
     $description = $json["description"];
-
     $sql = "UPDATE Categories set CategoryName =  " . "'" . $categoryName . "',description = '" . $description . "'";
     $sql .= " WHERE categoryId = " . $categoryId;
     header('Content-Type: application/json');
@@ -50,6 +48,7 @@ function update_category($data)
 
 function get_categories()
 {
+    global $conn;
     $sql = "SELECT categoryId, categoryName,picture From Categories order by CategoryID";
     $sortBy = $_GET['sortby'] ?? '';
     $sortOrder = $_GET['sortorder'] ?? '';
@@ -62,7 +61,7 @@ function get_categories()
         $sql = "SELECT categoryId, categoryName,description,Picture From Categories order by " . $sortBy . ' ' . $sortOrder;
 
     }
-    include_once '../common/connect.php';
+    
     $response = array();
 
     $result = $conn->query($sql);
@@ -87,11 +86,11 @@ function get_categories()
 
 function get_category($id)
 {
-
+    global $conn;
     $sql = "SELECT categoryId, categoryName,picture ,description From categories where CategoryId = " . $id;
 
-    include_once '../common/connect.php';
-    $response ;
+    
+    $response = "{}" ;
 
     $result = $conn->query($sql);
     header('Content-Type: application/json');
@@ -115,12 +114,10 @@ function get_category($id)
 
 function filter_category($name)
 {
+    global $conn;
 
     $sql = "SELECT CategoryID, CategoryName,Picture From Categories where CategoryName like  '%" . $name . "%'";
-
-    include_once '../common/connect.php';
     $response = array();
-
     $result = $conn->query($sql);
     header('Content-Type: application/json');
     if ($result->num_rows > 0) {
@@ -142,9 +139,8 @@ function filter_category($name)
 
 function delete_category($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  Categories where  CategoryID = " . $id;
-
     if ($conn->query($sql) === TRUE) {
         $conn->close();
         header('Content-Type: application/json');

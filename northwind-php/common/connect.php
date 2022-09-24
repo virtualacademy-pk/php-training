@@ -1,5 +1,6 @@
 <?php
-
+function get_connection()
+{
     $conn = new mysqli(
         'localhost',
         'root',
@@ -8,11 +9,13 @@
         3306
     );
 
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         echo 'Error in Connecting database';
         echo '<br>';
         echo $conn->connect_error;
         exit();
     }
+return $conn;
+}
 
 ?>

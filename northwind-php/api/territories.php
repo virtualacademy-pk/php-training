@@ -1,8 +1,10 @@
 <?php
+include_once '../common/connect.php';
+$conn = get_connection();
 function add_territory($data)
 {
 
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $territoryId = $json["territoryId"];
@@ -27,7 +29,7 @@ function add_territory($data)
 
 function update_territory($data)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $json = json_decode($data, true);
 
     $territoryId = $json["territoryId"];
@@ -55,7 +57,7 @@ function get_territories()
     $sql = "SELECT t.TerritoryID territoryId, t.TerritoryName territoryName, t.regionId , r.RegionDescription regionName
 from territories t inner join region r on t.RegionID = r.RegionID";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response = array();
 
     $result = $conn->query($sql);
@@ -84,7 +86,7 @@ function get_territory($id)
     $sql = "SELECT t.TerritoryID territoryId, t.TerritoryName territoryName, t.regionId , r.RegionDescription regionName
 from territories t inner join region r on t.RegionID = r.RegionID  where territoryId = $id";
 
-    include_once '../common/connect.php';
+    global $conn;
     $response ;
 
     $result = $conn->query($sql);
@@ -110,7 +112,7 @@ from territories t inner join region r on t.RegionID = r.RegionID  where territo
 
 function delete_territory($id)
 {
-    include_once '../common/connect.php';
+    global $conn;
     $sql = "DELETE FROM  territories where  territoryId = " . $id;
 
     if ($conn->query($sql) === TRUE) {
