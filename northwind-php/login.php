@@ -1,36 +1,36 @@
 <?php
 session_start();
 $error = null;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userName = $_POST['userName'];
-    $password = $_POST['password'];
-    if (strlen(trim($userName)) > 0 && strlen(trim($password)) > 0) {
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+    $userName = $_POST["userName"];
+    $password = $_POST["password"];
+    if (strlen(trim($userName)) > 0 && strlen(trim($userName)) > 0 ) {
         $sql = "select u.user_id userId, u.user_name userName,
        concat(e.FirstName,' ', e.LastName) employeeName
-        from users u
-        inner join employees e on u.employeeId = e.EmployeeID
-        where user_name ='$userName' and user_password = '$password'";
+    from users u
+         inner join employees e on u.employeeId = e.EmployeeID
+    where user_name = ? and user_password = ?";
+
         require_once 'common/connect.php';
         $conn = get_connection();
-        $result = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $userName, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            if ($row = $result->fetch_assoc()) {
+            if($row = $result->fetch_assoc()) {
                 $_SESSION["userInfo"] = $row;
                 header("Location: /northwind-php/index.php");
             }
+
         } else {
-            $error = 'Invalid Username or Password';
+            $error = "Invalid Username or Password";
         }
         $conn->close();
+
     } else {
-        $error = 'Both Username and Password are mandatory fields';
+        $error = "Both Username and Password are mandatory fields";
     }
-
-
-
-
-
-
 }
 ?>
 <html>
@@ -63,12 +63,13 @@ if (!empty($_SESSION["userInfo"])) {
          <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
              <div class="container">
                  <?php
-                 if ($error != null) {
-                 ?>
-                 <div class="alert alert-danger"><?php echo $error ?></div>
-                     <?php
+                 if($error != null) {
+                    ?>
+                     <div class="alert alert-danger"> <?php echo $error?> </div>
+                         <?php
                  }
-                     ?>
+                 ?>
+
 
                  <form method="post" action="login.php">
 
