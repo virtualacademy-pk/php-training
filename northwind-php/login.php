@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $error = null;
 if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -21,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             if($row = $result->fetch_assoc()) {
                 $_SESSION["userInfo"] = $row;
                 header("Location: /northwind-php/index.php");
+
             }
 
         } else {
@@ -42,18 +44,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 
     <a class="navbar-brand col-md-3 col-lg-3 me-0 px-3" href="#">Company name</a>
-    <ul class="nav col-md-9 col-md-auto mb-2 justify-content-start mb-md-0">
-<?php
-if (!empty($_SESSION["userInfo"])) {
-?>
-        <li><a  class="nav-link px-2 link-secondary"  >
-                Welcome, <?php echo $_SESSION["userInfo"]; ?>
-            </a>
-        </li>
-    <?php
-}
-    ?>
-    </ul>
 
 
 </header>
